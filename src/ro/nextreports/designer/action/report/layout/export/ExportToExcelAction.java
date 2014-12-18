@@ -17,9 +17,9 @@
 package ro.nextreports.designer.action.report.layout.export;
 
 import ro.nextreports.designer.Globals;
+import ro.nextreports.designer.LayoutHelper;
 import ro.nextreports.designer.util.I18NSupport;
 import ro.nextreports.designer.util.ImageUtil;
-
 import ro.nextreports.engine.exporter.ExporterBean;
 import ro.nextreports.engine.exporter.ResultExporter;
 import ro.nextreports.engine.exporter.XlsExporter;
@@ -42,8 +42,12 @@ public class ExportToExcelAction extends ExportAction {
 	}	
 	
 	@Override
-	protected String getFileExtension() {		
-		return "xls";
+	protected String getFileExtension() {	
+		
+		if(LayoutHelper.getReportLayout() != null && LayoutHelper.getReportLayout().getTemplateName()!=null && LayoutHelper.getReportLayout().getTemplateName().endsWith("xlsx"))
+			return "xlsx";
+		else
+			return "xls";
 	}
 
 	@Override

@@ -70,7 +70,7 @@ public class ReleaseInfo {
 
 
    /** version (set during build process to "6.2-SNAPSHOT"). */
-   private static String version = "6.2-SNAPSHOT";
+   private static String version = "7.3";
 
    /**
     * Get version (set during build process to "6.2-SNAPSHOT").
