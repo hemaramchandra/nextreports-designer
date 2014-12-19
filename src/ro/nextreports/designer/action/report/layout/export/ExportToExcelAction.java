@@ -24,6 +24,7 @@ import ro.nextreports.engine.exporter.ExporterBean;
 import ro.nextreports.engine.exporter.ResultExporter;
 import ro.nextreports.engine.exporter.XlsExporter;
 import ro.nextreports.engine.Report;
+import ro.nextreports.engine.ReportLayout;
 import ro.nextreports.engine.ReportRunner;
 
 /**
@@ -43,9 +44,9 @@ public class ExportToExcelAction extends ExportAction {
 	
 	@Override
 	protected String getFileExtension() {	
-		
-		if(LayoutHelper.getReportLayout() != null && LayoutHelper.getReportLayout().getTemplateName()!=null && LayoutHelper.getReportLayout().getTemplateName().endsWith("xlsx"))
-			return "xlsx";
+		String extension = getTemplateExtension();
+		if(extension.length()>0)
+			return extension;
 		else
 			return "xls";
 	}
@@ -61,4 +62,16 @@ public class ExportToExcelAction extends ExportAction {
 	protected void afterExport(String filePath, String reportName)  {    	
 		XlsExporter.createSummaryInformation(filePath, reportName);
     }
+	
+	private String getTemplateExtension()
+	{
+		ReportLayout layout = LayoutHelper.getReportLayout();
+		
+		if(layout != null && layout.getTemplateName()!=null && !"".equals(layout.getTemplateName().toString()))  
+				if(layout.getTemplateName().toLowerCase().endsWith("xlsm"))
+					return "xlsm";
+				else if(layout.getTemplateName().toLowerCase().endsWith("xlsx"))
+					return "xlsx";
+		return "";
+	}
 }

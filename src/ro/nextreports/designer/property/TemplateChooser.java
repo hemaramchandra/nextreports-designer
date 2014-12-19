@@ -10,7 +10,6 @@ import ro.nextreports.designer.Globals;
 import ro.nextreports.designer.util.FileUtil;
 import ro.nextreports.designer.util.I18NSupport;
 import ro.nextreports.designer.util.file.ExcelFilter;
-import ro.nextreports.designer.util.file.XlsxExcelFilter;
 
 public class TemplateChooser {
 	
@@ -20,8 +19,6 @@ public class TemplateChooser {
         fc.setDialogTitle(I18NSupport.getString("property.template.name"));
         fc.setAcceptAllFileFilterUsed(false);
         fc.addChoosableFileFilter(new ExcelFilter());
-        fc.addChoosableFileFilter(new XlsxExcelFilter());
-        
         int returnVal = fc.showOpenDialog(Globals.getMainFrame());
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             final File f = fc.getSelectedFile();
